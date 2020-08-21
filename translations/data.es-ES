@@ -76,6 +76,7 @@
       "querying": "Consultando...",
       "noresults": "Sin información disponible sobre el punto seleccionado",
       "export": "Exportar",
+      "exportformat": "",
       "featureReport": "Informe del elemento",
       "noattributes": "Sin atributos",
       "title": "Información del elemento",
@@ -102,7 +103,9 @@
       "keywords": "Palabras claves",
       "dataUrl": "Dirección URL de datos",
       "metadataUrl": "Dirección URL de metadatos",
-      "legend": "Leyenda"
+      "legend": "Leyenda",
+      "maxscale": "",
+      "minscale": ""
     },
     "layertree": {
       "compare": "Comparar con la capa superior",
@@ -112,7 +115,8 @@
       "deletealllayers": "",
       "visiblefilter": "",
       "separator": "",
-      "separatortooltip": ""
+      "separatortooltip": "",
+      "zoomtolayer": ""
     },
     "locate": {
       "metersUnit": "metros",
@@ -171,6 +175,7 @@
       "draw": "",
       "edit": "",
       "fill": "Relleno",
+      "freehand": "",
       "label": "Etiqueta",
       "layer": "Capa",
       "line": "Línea",
@@ -205,15 +210,26 @@
       "zoomout": "Alejarse",
       "background": "Cambiar fondo"
     },
+    "themelayerslist": {
+      "addlayer": "",
+      "addlayerstotheme": "",
+      "addselectedlayers": ""
+    },
     "themeswitcher": {
       "filter": "Filtrar...",
       "addtotheme": "Agregar al actual tema",
+      "addlayerstotheme": "",
       "match": {
         "title": "",
         "keywords": "",
         "abstract": ""
       },
       "openintab": ""
+    },
+    "window": {
+      "close": "",
+      "dock": "",
+      "undock": ""
     }
   }
 }

@@ -76,6 +76,7 @@
       "querying": "Consultando...",
       "noresults": "Nenhuma informação disponível para o ponto selecionado",
       "export": "Exportar",
+      "exportformat": "",
       "featureReport": "Reportar",
       "noattributes": "",
       "title": "Informações da Funcionalidade",
@@ -102,7 +103,9 @@
       "keywords": "Palavras-chave",
       "dataUrl": "Data URL",
       "metadataUrl": "Metadados URL",
-      "legend": "Legenda"
+      "legend": "Legenda",
+      "maxscale": "",
+      "minscale": ""
     },
     "layertree": {
       "compare": "Comparar camada superior",
@@ -112,7 +115,8 @@
       "deletealllayers": "",
       "visiblefilter": "",
       "separator": "",
-      "separatortooltip": ""
+      "separatortooltip": "",
+      "zoomtolayer": ""
     },
     "locate": {
       "metersUnit": "metros",
@@ -171,6 +175,7 @@
       "draw": "",
       "edit": "",
       "fill": "Preenchimento",
+      "freehand": "",
       "label": "Rótulo",
       "layer": "",
       "line": "Linha",
@@ -205,15 +210,26 @@
       "zoomout": "",
       "background": ""
     },
+    "themelayerslist": {
+      "addlayer": "",
+      "addlayerstotheme": "",
+      "addselectedlayers": ""
+    },
     "themeswitcher": {
       "filter": "Filtro...",
       "addtotheme": "",
+      "addlayerstotheme": "",
       "match": {
         "title": "",
         "keywords": "",
         "abstract": ""
       },
       "openintab": ""
+    },
+    "window": {
+      "close": "",
+      "dock": "",
+      "undock": ""
     }
   }
 }

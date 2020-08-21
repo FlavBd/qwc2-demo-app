@@ -76,6 +76,7 @@
       "querying": "Querying...",
       "noresults": "No information available for the selected point",
       "export": "Export",
+      "exportformat": "Export format:",
       "featureReport": "Feature report",
       "noattributes": "No attributes",
       "title": "Feature Info",
@@ -102,7 +103,9 @@
       "keywords": "Keywords",
       "dataUrl": "Data URL",
       "metadataUrl": "Metadata URL",
-      "legend": "Legend"
+      "legend": "Legend",
+      "maxscale": "Max. displayscale",
+      "minscale": "Min. displayscale"
     },
     "layertree": {
       "compare": "Compare top layer",
@@ -112,7 +115,8 @@
       "deletealllayers": "Remove all layers",
       "visiblefilter": "Filter invisible layers",
       "separator": "Separator",
-      "separatortooltip": "Add separator"
+      "separatortooltip": "Add separator",
+      "zoomtolayer": "Zoom to layer"
     },
     "locate": {
       "metersUnit": "meters",
@@ -171,6 +175,7 @@
       "draw": "Draw",
       "edit": "Edit",
       "fill": "Fill",
+      "freehand": "Freehand drawing",
       "label": "Label",
       "layer": "Layer",
       "line": "Line",
@@ -205,15 +210,26 @@
       "zoomout": "Zoom out",
       "background": "Switch background"
     },
+    "themelayerslist": {
+      "addlayer": "Add layer",
+      "addlayerstotheme": "Add layers to current map",
+      "addselectedlayers": "Add selected layer(s)"
+    },
     "themeswitcher": {
       "filter": "Filter...",
       "addtotheme": "Add to current theme",
+      "addlayerstotheme": "Add layers to current map",
       "match": {
         "title": "Title",
         "keywords": "Keywords",
         "abstract": "Abstract"
       },
       "openintab": "Open in Tab"
+    },
+    "window": {
+      "close": "Close",
+      "dock": "Dock",
+      "undock": "Undock"
     }
   }
 }

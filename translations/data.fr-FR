@@ -76,6 +76,7 @@
       "querying": "Identification en cours...",
       "noresults": "Pas de résultats pour la position sélectionnée",
       "export": "Exporter",
+      "exportformat": "Format d'export:",
       "featureReport": "Données de l'objet",
       "noattributes": "Pas d'attribut",
       "title": "Informations sur l'objet",
@@ -102,7 +103,9 @@
       "keywords": "Mots-clés",
       "dataUrl": "URL des données",
       "metadataUrl": "URL des métadonnées",
-      "legend": "Légende"
+      "legend": "Légende",
+      "maxscale": "",
+      "minscale": ""
     },
     "layertree": {
       "compare": "Comparer",
@@ -112,7 +115,8 @@
       "deletealllayers": "",
       "visiblefilter": "",
       "separator": "",
-      "separatortooltip": ""
+      "separatortooltip": "",
+      "zoomtolayer": ""
     },
     "locate": {
       "metersUnit": "mètre",
@@ -171,6 +175,7 @@
       "draw": "Dessiner",
       "edit": "Editer",
       "fill": "Remplissage",
+      "freehand": "Dessin à main levée",
       "label": "Texte",
       "layer": "Couche",
       "line": "Ligne",
@@ -205,15 +210,26 @@
       "zoomout": "Dézoomer",
       "background": "Changer de fond"
     },
+    "themelayerslist": {
+      "addlayer": "Ajouter la couche",
+      "addlayerstotheme": "Ajouter des couches à la carte",
+      "addselectedlayers": "Ajouter les couches sélectionnées"
+    },
     "themeswitcher": {
       "filter": "Filtre",
       "addtotheme": "Ajouter au thème actuel",
+      "addlayerstotheme": "Ajouter des couches à la carte",
       "match": {
         "title": "",
         "keywords": "",
         "abstract": ""
       },
       "openintab": ""
+    },
+    "window": {
+      "close": "",
+      "dock": "",
+      "undock": ""
     }
   }
 }

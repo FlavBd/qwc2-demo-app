@@ -76,6 +76,7 @@
       "querying": "Frågar...",
       "noresults": "Ingen information för vald punkt",
       "export": "Exportera",
+      "exportformat": "",
       "featureReport": "Objektrapport",
       "noattributes": "Inga attribut",
       "title": "Objektinformation",
@@ -102,7 +103,9 @@
       "keywords": "Nyckelord",
       "dataUrl": "Datalänk",
       "metadataUrl": "Metadatalänk",
-      "legend": "Teckenförklaring"
+      "legend": "Teckenförklaring",
+      "maxscale": "",
+      "minscale": ""
     },
     "layertree": {
       "compare": "Jämför översta lagret",
@@ -112,7 +115,8 @@
       "deletealllayers": "Ta bort alla lager",
       "visiblefilter": "",
       "separator": "",
-      "separatortooltip": ""
+      "separatortooltip": "",
+      "zoomtolayer": ""
     },
     "locate": {
       "metersUnit": "meter",
@@ -171,6 +175,7 @@
       "draw": "Rita",
       "edit": "Redigera",
       "fill": "Fyllning",
+      "freehand": "",
       "label": "Etikett",
       "layer": "Lager",
       "line": "Linje",
@@ -205,15 +210,26 @@
       "zoomout": "Zooma ut",
       "background": "Byt bakgrund"
     },
+    "themelayerslist": {
+      "addlayer": "",
+      "addlayerstotheme": "",
+      "addselectedlayers": ""
+    },
     "themeswitcher": {
       "filter": "Filtrera...",
       "addtotheme": "Lägg till aktuellt tema",
+      "addlayerstotheme": "",
       "match": {
         "title": "",
         "keywords": "",
         "abstract": ""
       },
       "openintab": ""
+    },
+    "window": {
+      "close": "",
+      "dock": "",
+      "undock": ""
     }
   }
 }

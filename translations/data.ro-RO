@@ -3,7 +3,7 @@
   "messages": {
     "appmenu": {
       "items": {
-        "ExternalLink": "",
+        "ExternalLink": "Link extern",
         "DxfExport": "Export DXF",
         "Help": "Ajutor",
         "LayerTree": "Straturi & Legendă",
@@ -22,7 +22,7 @@
       "menulabel": "Hărți & Unelte"
     },
     "search": {
-      "coordinates": "",
+      "coordinates": "Coordonate",
       "more": "Mai multe...",
       "search": "Caută",
       "searchall": "Caută în toate",
@@ -30,7 +30,7 @@
       "themes": "Hărți tematice",
       "invisiblelayer": "Rezultatul este într-un strat invizibil",
       "enablelayer": "Activare strat",
-      "existinglayer": ""
+      "existinglayer": "Strat existent"
     },
     "bgswitcher": {
       "nobg": "Fără fundal"
@@ -39,7 +39,7 @@
       "mousepos_label": "Coordonate",
       "scale_label": "Scară",
       "terms_label": "Termeni de utilizare",
-      "viewertitle_label": "Harta GIS"
+      "viewertitle_label": "Despre"
     },
     "copybtn": {
       "click_to_copy": "Click pt. copiere",
@@ -76,6 +76,7 @@
       "querying": "Interogare...",
       "noresults": "Nu există informații în punctul cerut",
       "export": "Export",
+      "exportformat": "",
       "featureReport": "Raport entitate",
       "noattributes": "Fără atribute",
       "title": "Info Entități",
@@ -88,12 +89,12 @@
       "addlayer": "Adaugă strat",
       "connect": "Conectare",
       "filter": "Filtrare",
-      "localfile": "Fișierul local",
+      "localfile": "Fișier local",
       "nofeatures": "Nu s-a putut importa nicio entitate",
       "noresults": "Fără rezultat sau URL invalid",
-      "loading": "",
+      "loading": "Se încarcă",
       "url": "URL",
-      "urlplaceholder": "Introdu URL către WMS, WFS..."
+      "urlplaceholder": "Introdu URL către WMS, WFS, KML, GeoJSON..."
     },
     "layerinfo": {
       "title": "Info Strat",
@@ -102,7 +103,9 @@
       "keywords": "Cuvinte cheie",
       "dataUrl": "URL date",
       "metadataUrl": "URL metadate",
-      "legend": "Legendă"
+      "legend": "Legendă",
+      "maxscale": "Scara maximă",
+      "minscale": "Scara minimă"
     },
     "layertree": {
       "compare": "Compară stratul de sus",
@@ -111,8 +114,9 @@
       "printlegend": "Tipărește legenda",
       "deletealllayers": "Elimină toate straturile",
       "visiblefilter": "Filtrează straturile invizibile",
-      "separator": "",
-      "separatortooltip": ""
+      "separator": "separator",
+      "separatortooltip": "Indiciu separator",
+      "zoomtolayer": "Zoom la strat"
     },
     "locate": {
       "metersUnit": "metri",
@@ -171,6 +175,7 @@
       "draw": "Desenează",
       "edit": "Modifică",
       "fill": "Interior",
+      "freehand": "Mână liberă",
       "label": "Text",
       "layer": "Strat",
       "line": "Linie",
@@ -205,15 +210,26 @@
       "zoomout": "Micșorare",
       "background": "Straturi suport"
     },
+    "themelayerslist": {
+      "addlayer": "",
+      "addlayerstotheme": "",
+      "addselectedlayers": ""
+    },
     "themeswitcher": {
       "filter": "Filtrare",
       "addtotheme": "Adaugă la temă",
+      "addlayerstotheme": "",
       "match": {
-        "title": "",
-        "keywords": "",
-        "abstract": ""
+        "title": "Titlu",
+        "keywords": "Cuvinte cheie",
+        "abstract": "Abstract"
       },
-      "openintab": ""
+      "openintab": "Deschide în tab nou"
+    },
+    "window": {
+      "close": "Închide",
+      "dock": "Andocare",
+      "undock": "Anulează andocarea"
     }
   }
 }

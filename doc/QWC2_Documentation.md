@@ -100,7 +100,6 @@ Some external services can be used to enhance the application. Sample services a
 
 | Setting              | Description |
 |----------------------|-------------|
-|`proxyServiceUrl`     | Ensures replies from cross-origin requests contain the CORS header. See [Cross-Origin requests](#cross-origin-requests).|
 |`permalinkServiceUrl` | Generates and resolves compact permalinks for the Share plugin. If omitted, the full URL will be used. |
 |`elevationServiceUrl` | Returns elevation values, used to generate a height profile when measuring lines and display elevation information in the map right-click information bubble. If omitted, the respective information will not be displayed in the client.|
 |`mapInfoService`      | Returns additional information to be displayed in the map right-click information bubble. If omitted, no additional information will be displayed.|
@@ -133,6 +132,7 @@ The following options can be specified globally, and also overriden per theme, s
 |`preserveNonThemeLayersOnThemeSwitch` | Whether to preserve non-theme layers when switching theme.                          |
 |`allowReorderingLayers`               | Whether to allow re-ordering layers in the layer tree.                              |
 |`flattenLayerTreeGroups`              | Whether to display a flat layer tree, omitting the groups.                          |
+|`allowLayerTreeSeparators`            | Allows users to add separator items in a flat layer tree.                           |
 |`preventSplittingGroupsWhenReordering`| Whether to prevent splitting sibling groups or the group itself when reordering items. |
 |`allowRemovingThemeLayers`            | Whether to allow removing any theme layers from the layer tree.                     |
 |`searchThemes`                        | Whether allow searching for themes from the global search field.                    |
@@ -201,7 +201,7 @@ The first step is to prepare a QGIS project. Besides the common tasks of adding 
 |----------------------|-------------------------------------------|--------------------------------------------------|
 | Service capabilities | Project Properties &rarr; QGIS Server &rarr; Service capabilities | **Must** be checked for QGIS Server to publish the project. |
 | Title, keywords      | Project Properties &rarr; QGIS Server &rarr; Service capabilities | Theme title, displayed in the Theme Switcher, and keywords, useful for filtering. |
-| Queryable layers     | Project Properties &rarr; Identify Layers | Mark layers as identifyable by the client.       |
+| Queryable layers     | Project Properties &rarr; Data sources | Mark layers as identifyable by the client.       |
 | FeatureInfo geometry | Project Properties &rarr; QGIS Server &rarr; WMS Capabilities &rarr; Add geometry to feature response | Return feature geometries with the GetFeatureInfo request. Allows the client to highlight the selected features. |
 | Layer Display Field  | Vector Layer Properties &rarr; Display    | The field used in the identify results. |
 | Layer Map Tip        | Vector Layer Properties &rarr; Display    | The contents of the Map Tip shown when hovering over layers in the client, if displaying Map Tips is enabled in the Layer Tree. |
@@ -283,13 +283,18 @@ The format of the theme definitions is as follows:
 | `"externalLayers": [{`                        | Optional, external layers to use as replacements for internal layers, see below. |
 | `  "name": "<external_layer_name>",`          | Name of the external layer, matching a `ExternalLayerDefinition`, see below.     |
 | `  "internalLayer": "<QGis_layer_name>",`     | Name of an internal layer, as contained in the QGIS project, to replace with the external layer. |
-| `"themeInfoLinks": ["<link_name>", ...]`      | Optional, list of theme info link names, see below.                              |
+| `"themeInfoLinks": {`                         | Optional, custom links to additional resources, shown as a menu in the theme selector in the theme switcher.\
+| `  "title": "<Menu title>",`                  | An arbitrary string shown as title of the menu.                                  |
+| `  "titleMsgId": "<Menu title msgID>",`       | Alternative to `title`, a message ID, translated through the translation files.  |
+| `  "entries": [<link_name>, ...]`             | List of theme info link names, see below.                                        |
+| `},`                                          |                                                                                  |
 | `"backgroundLayers": [{,`                     | Optional, list of available background layers.                                   |
 | `  "name": "<Background layer name>",`        | Name of matching `BackgroundLayerDefinition`, see below.                         |
 | `  "printLayer": "<QGis layer name>"\|[<list>],`| Optional, name of layer to use as matching background layer when printing. Alternatively, a list `[{"maxScale": <scale>, "name": "<QGis layer name>"}, ..., {"maxScale": null, "name": "<QGis layer name>"}]` can be provided, ordered in ascending order by `maxScale`. The last entry should have `maxScale` `null`, as the layer used for all remaining scales. If omitted, no background is printed. |
 | `  "visibility": <boolean>`                   | Optional, initial visibility of the layer when theme is loaded.                  |
 | `}],`                                         |                                                                                  |
 | `"searchProviders": ["<ProviderId>"],`        | Optional, list of search providers IDs. An ID corresponds to the key of the exported `SearchProviders` object in `js/SearchProviders.js`. |
+| `"minSearchScaleDenom": <number>,`                 | Optional, minimum scale to enforce when zooming to search results. Takes precedence over value in `config.json`. |
 | `"featureReport": {`                          | Optional, available feature report templates.                                    |
 | `  "<LayerId>": "<TemplateID>"  `             | WMS sublayer ID and associated template ID to pass to the `featureReportService`.|
 | `},`                                          |                                                                                  |
@@ -358,9 +363,38 @@ The format of the background layer definitions is as follows:
 | `"thumbnail": "<Filename>",` | Optional, image file in `assets/img/mapthumbs`. Defaults to `default.jpg`.        |
 | `"type": "<Type>",`          | The background layer type, i.e. `wms` or `wmts`.                                  |
 | `"group":  "<GroupId>",`     | Optional, a group ID string. Background layers with the same group ID will be grouped together in the background switcher. |
+| `"minScale": <min_scale>,`   | Optional, minimum scale denominator from which to render the layer.               |
+| `"maxScale": <max_scale>,`   | Optional, maximum scale denominator from which to render the layer.               |
 | `<Layer params>`             | Parameters according to the specified layer type. Refer to the [sample `themesConfig.json`](https://github.com/qgis/qwc2-demo-app/blob/master/themesConfig.json) for some examples. |
 
 *Note*: You can use the helper python script located at `qwc2/scripts/wmts_config_generator.py` to easily generate WMTS background layer configurations.
+
+Alternatively, a background layer definition can be a group of layers, in the format
+
+    {
+      "name": "<Name>",
+      "title": "<Title>",
+      "type": "group",
+      "items": [
+        { <BackgroundLayerDefinition> },
+        { <BackgroundLayerDefinition> },
+        ...
+      ]
+    }
+
+Instead of specifiying a full background layer definition in a group, you can also reference an existing one with `"ref": "<bg_layer_name>"`, and selectively override certain properties, such as `minScale` and `maxScale`:
+
+    {
+      ...
+      "items": [
+        {
+          "ref": "<bg_layer_name>",
+          "minScale": <min_scale>,
+          "maxScale": <max_scale>
+        },
+        ...
+      ]
+    }
 
 #### <a name="themes-json"></a>Generating `themes.json`
 
@@ -488,20 +522,17 @@ For each service QWC2 interacts with, in particular the QGIS Server, one has to 
 
 - Ensure that the service runs on the same origin as the web server which serves the QWC2 application.
 - Ensure that the service sends a `Access-Control-Allow-Origin` header with matching origin with each response.
-- Use a proxy service which ensures the `Access-Control-Allow-Origin` are added. The URL to this service needs to be specified as `proxyServiceUrl` in the `config.json` file. A sample implementation of such a proxy service is available [in the qwc2-server repository](https://github.com/sourcepole/qwc2-server).
+- For development purposes, use a browser plugin which adds the CORS headers, i.e. [CORS Everywhere](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/).
 
 ### Filenames of print and raster and DXF export
 The QGIS server response for the print, raster and DXF export requests does by default not contain any `Content-Disposition` header, meaning that browsers will attempt to guess a filename, which typically is the last part of the URL, without any extension.
 
-To ensure browser use a proper filename, the following options exist:
+To ensure browsers use a proper filename, configure the web server running QGIS Server to add a suitable `Content-Disposition` header to the response. In the case of Apache, the rule for the print output might look as follows:
 
-- Configure the web server running QGIS Server to add a suitable `Content-Disposition` header to the response. In the case of Apache, the rule for the print output might look as follows:
+    SetEnvIf Request_URI "^/wms.*/(.+)$" project_name=$1
+    Header always setifempty Content-Disposition "attachment; filename=%{project_name}.pdf" "expr=%{CONTENT_TYPE} = 'application/pdf'"
 
-      SetEnvIf Request_URI "^/wms.*/(.+)$" project_name=$1
-      Header always setifempty Content-Disposition "attachment; filename=%{project_name}.pdf" "expr=%{CONTENT_TYPE} = 'application/pdf'"
-
-  This rule will use the last part of the URL as basename and add the `.pdf` extension, and will also ensure that the content-type is set to `application/pdf`. Note that this example uses the `setenvif` and `headers` apache modules.
-- Use a proxy service which adds a `Content-Disposition` header if necessary. QWC2 helps in this regard by automatically adding a `filename=<filename>` query parameter if `proxyServiceUrl` is set in `config.json` for requests which are expected to return a downloadable file. See the sample proxy service [in the qwc2-server repository](https://github.com/sourcepole/qwc2-server) for details.
+This rule will use the last part of the URL as basename and add the `.pdf` extension, and will also ensure that the content-type is set to `application/pdf`. Note that this example uses the `setenvif` and `headers` apache modules.
 
 ## <a name="url-parameters"></a>URL parameters
 The following parameters can appear in the URL of the QWC2 application:
@@ -534,7 +565,7 @@ The `urlPositionFormat` parameter in `config.json` determines whether the extent
 
 The `urlPositionCrs` parameter in `config.json` determines the projection to use for the extent resp. center coordinates in the URL. By default the map projection of the current theme is used. If `urlPositionCrs` is equal to the map projection, the `crs` parameter is omitted in the URL.
 
-If the search text passed via `st` results in a unique result, the viewer automatically zooms to this result on startup. If the search result does not provide a bounding box, the `minScale` defined in the `searchOptions` of the `TopBar` configuration in `config.json` is used.
+If the search text passed via `st` results in a unique result, the viewer automatically zooms to this result on startup. If the search result does not provide a bounding box, the `minScaleDenom` defined in the `searchOptions` of the `TopBar` configuration in `config.json` is used.
 
 ## Startup position
 By default, the viewer opens zooming on the respective theme extent, as defined in `themes.json` (and overrideable in `themesConfig.json`).
@@ -543,7 +574,7 @@ Alternatively, the following three options exist to influence the startup positi
 
 - Pass appropriate `c`, `s` or `e` URL parameters, as documented in [URL parameters](#url-parameters).
 - Pass a search text which results in a unique result (i.e. a coordinate string) as URL parameter, as documented in [URL parameters](#url-parameters).
-- Set `startupMode` in the `LocateSupport` options of the `Map` configuration in `config.json`. Possible values are `DISABLED`, `ENABLED` or `FOLLOWING`. If a search text is passed via `st` URL parameter, the `startupMode` is ignored.
+- Set `startupMode` in the `LocateSupport` options of the `Map` configuration in `config.json`. Possible values are `DISABLED`, `ENABLED` or `FOLLOWING`. If a search text is passed via `st` URL parameter or `hc=1` is specified in the URL, the `startupMode` is ignored.
 
 ### <a name="layer-catalogs"></a>Layer catalogs
 The import layer functionality in the layertree also supports loading a layer catalog document from an URL. Two catalog formats are supported:
@@ -603,5 +634,3 @@ QWC2 is written in JavaScript using in particular the ReactJS, Redux and OpenLay
 - https://egghead.io/courses/building-react-applications-with-idiomatic-redux
 
 When developing, it is useful to add `debug=true` to the URL query parameters, which will enable logging of all application state changes to the browser console.
-
-

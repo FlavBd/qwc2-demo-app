@@ -14,6 +14,7 @@
   "preserveNonThemeLayersOnThemeSwitch": true,
   "allowReorderingLayers": true,
   "preventSplittingGroupsWhenReordering": false,
+  "allowLayerTreeSeparators": false,
   "allowRemovingThemeLayers": true,
   "searchThemes": true,
   "allowAddingOtherThemes": true,
@@ -112,7 +113,7 @@
                 {"key": "Help", "icon": "info"}
               ],
               "searchOptions": {
-                "minScale": 1000,
+                "minScaleDenom": 1000,
                 "showProviderSelection": true,
                 "providerSelectionAllowAll": true,
                 "zoomToLayers": false,
@@ -144,7 +145,7 @@
               "FI_POLYGON_TOLERANCE": 8,
               "feature_count": 20
             },
-            "exportFormat": "csv",
+            "enableExport": true,
             "longAttributesDisplay": "wrap",
             "displayResultTree": false,
             "featureInfoReturnsLayerName": true
@@ -322,7 +323,7 @@
                 {"key": "IdentifyRegion", "icon": "identify_region"}
               ],
               "searchOptions": {
-                "minScale": 1000,
+                "minScaleDenom": 1000,
                 "showProviderSelection": true,
                 "providerSelectionAllowAll": true,
                 "zoomToLayers": false,
@@ -379,7 +380,7 @@
               "FI_POLYGON_TOLERANCE": 4,
               "feature_count": 20
             },
-            "exportFormat": "csv",
+            "enableExport": true,
             "longAttributesDisplay": "wrap",
             "displayResultTree": false,
             "featureInfoReturnsLayerName": true,

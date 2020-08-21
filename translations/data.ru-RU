@@ -76,6 +76,7 @@
       "querying": "Выполняется запрос...",
       "noresults": "Для выбранной точки нет доступной информации",
       "export": "Экспорт",
+      "exportformat": "",
       "featureReport": "Отчёт об объекте",
       "noattributes": "Аттрибуты отсутствуют",
       "title": "Информация об объекте",
@@ -102,7 +103,9 @@
       "keywords": "Ключевые слова",
       "dataUrl": "URL данных",
       "metadataUrl": "URL метаданных",
-      "legend": "Легенда"
+      "legend": "Легенда",
+      "maxscale": "",
+      "minscale": ""
     },
     "layertree": {
       "compare": "Сравнить верхний слой",
@@ -112,7 +115,8 @@
       "deletealllayers": "",
       "visiblefilter": "",
       "separator": "",
-      "separatortooltip": ""
+      "separatortooltip": "",
+      "zoomtolayer": ""
     },
     "locate": {
       "metersUnit": "метров",
@@ -171,6 +175,7 @@
       "draw": "",
       "edit": "",
       "fill": "Заливка",
+      "freehand": "",
       "label": "Надпись",
       "layer": "",
       "line": "Линия",
@@ -205,15 +210,26 @@
       "zoomout": "Уменьшить",
       "background": "Сменить фон"
     },
+    "themelayerslist": {
+      "addlayer": "",
+      "addlayerstotheme": "",
+      "addselectedlayers": ""
+    },
     "themeswitcher": {
       "filter": "Фильтр...",
       "addtotheme": "",
+      "addlayerstotheme": "",
       "match": {
         "title": "",
         "keywords": "",
         "abstract": ""
       },
       "openintab": ""
+    },
+    "window": {
+      "close": "",
+      "dock": "",
+      "undock": ""
     }
   }
 }
